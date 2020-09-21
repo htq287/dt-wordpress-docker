@@ -7,7 +7,7 @@ docker-compose --log-level ERROR up -d example_com_db
 source .env
 
 # Wait
-while ! (docker-compose exec wizylance_blog_db /usr/bin/mysqladmin -u $MYSQL_USER --password=${MYSQL_ROOT_PASSWORD} ping --silent)
+while ! (docker-compose exec example_com_db /usr/bin/mysqladmin -u $MYSQL_USER --password=${MYSQL_ROOT_PASSWORD} ping --silent)
 do
 	sleep 3
 	echo "Wait for DB to initialize"
