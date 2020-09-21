@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  example_com_db:
+    image: mysql:8.0
+    container_name: example_com_db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MYSQL_DATABASE=$DB_NAME
+    volumes: 
+      - dbdata:/var/lib/mysql
+    command: '--default-authentication-plugin=mysql_native_password'
+    networks:
+      - app-network
+
+  example_com:
+    depends_on:
+      - example_com_db
+    image: example_com/wordpress:5.5.1-fpm-alpine
+    container_name: example_com
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - WORDPRESS_DB_HOST=$DB_HOST
+      - WORDPRESS_DB_USER=$DB_USER
+      - WORDPRESS_DB_PASSWORD=$DB_PASSWORD 
+      - WORDPRESS_DB_NAME=$DB_NAME
+    volumes:
+      - example_com:/apps/example_com
+    networks:
+      - app-network
+
+  docker_nginx:
+    depends_on:
+      - example_com
+    image: nginx:latest
+    container_name: docker_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - example_com:/apps/example_com
+      - ./nginx-conf/example.com.conf:/etc/nginx/conf.d/example.com.conf
+    networks:
+      - app-network
+volumes:
+  example_com:
+  dbdata:
+
+networks:
+  app-network:
+    driver: bridge  
