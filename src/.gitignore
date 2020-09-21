@@ -1,0 +1,4 @@
+# Dotenv
+.env
+.env.*
+!.env.local

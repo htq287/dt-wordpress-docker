@@ -1,0 +1,24 @@
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Vendor (e.g. Composer)
+src/vendor/*
+!src/vendor/.gitkeep
+
+# Node Package Manager
+node_modules
+
+# Certs
+certs/
+
+# Logs
+logs/
+
+# Vagrant
+bin
+.vagrant
+
+# Custom
+.DS_Store
