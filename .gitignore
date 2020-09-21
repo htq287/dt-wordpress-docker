@@ -1,6 +1,6 @@
 # Dotenv
 .env
-.env.*
+#.env.*
 !.env.example
 
 # Vendor (e.g. Composer)
