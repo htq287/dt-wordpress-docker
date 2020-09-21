@@ -7,6 +7,14 @@ Deploying with Docker
     ```sh
     $ docker build -t example_com/wordpress:5.5.1-fpm-alpine .
     ```
+  - Clean up the old containers
+    ```sh
+    $ docker-compose down -d
+    ```
+  - Load containers
+    ```sh
+    $ docker-compose up -d
+    ```
     
 # License
 The MIT License (MIT)
