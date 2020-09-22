@@ -9,12 +9,26 @@ Deploying with Docker
     ```
   - Clean up the old containers
     ```sh
-    $ docker-compose down -d
+    $ docker-compose down
     ```
-  - Load containers
+  - Remove all the old volumes
+    ```
+      $ docker volume rm $(docker volume ls -q) 
+    ```
+  - Load the new containers
     ```sh
     $ docker-compose up -d
     ```
+  - Import database
+    ```
+    $ source import_db.sh 
+    # make sure dbpath defined in file .env
+    ```
+Backup data
+  ```
+  $ source export_db.sh
+  # the backup database saved in ./src/data
+  ```
     
 # License
 The MIT License (MIT)
