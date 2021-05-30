@@ -17,7 +17,7 @@ services:
   example_com:
     depends_on:
       - example_com_db
-    image: example_com/wordpress:5.5.1-fpm-alpine
+    image: example_com/wordpress:5.7.2-fpm-alpine
     container_name: example_com
     restart: unless-stopped
     env_file: .env
